@@ -6,8 +6,35 @@ const healValue = 20;
 const userGivenLife = prompt("Give life!", "100");
 
 let maxLife = parseInt(userGivenLife);
+let battleLog = [];
 
-if(isNaN(maxLife) || maxLife <= 0) {
+const logAttack = "ATTACK";
+const logStrongAttack = "STRONG_ATTACK";
+const logMonsterAttack = "MONSTER_ATTACK";
+const logHeal = "HEAL";
+const logGameOver = "GAME_OVER";
+
+writeToLog = (eventType) => {
+	let logEntry = {
+		event: eventType,
+	};
+
+	if (eventType === logAttack) {
+		logEntry;
+	} else if (eventType === logStrongAttack) {
+		logEntry;
+	} else if (eventType === logMonsterAttack) {
+		logEntry;
+	} else if (eventType === logHeal) {
+		logEntry;
+	} else if (eventType === logGameOver) {
+		logEntry;
+	}
+
+	battleLog.push(logEntry);
+};
+
+if (isNaN(maxLife) || maxLife <= 0) {
 	maxLife = 100;
 }
 
@@ -40,29 +67,32 @@ endRound = () => {
 	if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
 		alert("you won!");
 		reset();
+		writeToLog('CHAMPION!');
 	} else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
 		alert("you lost!");
 		reset();
+		writeToLog('LOSER!');
 	} else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
 		alert("draw!");
 		reset();
+		writeToLog('DRAW!');
 	}
-};
-
-attackMonster = (damage) => {
-	currentMonsterHealth -= damage;
-	endRound();
 };
 
 attackHandler = () => {
 	const damage = dealMonsterDamage(attackValue);
-	attackMonster(damage);
-	console.log(currentPlayerHealth.toFixed(1));
+	monsterAttack(damage);
+};
+
+monsterAttack = (damage) => {
+	currentMonsterHealth -= damage;
+	endRound();
 };
 
 strongAttackHandler = () => {
 	const strongDamage = dealMonsterDamage(strongAttackValue);
-	attackMonster(strongDamage);
+	monsterAttack(strongDamage);
+	
 };
 
 healHandler = () => {
@@ -81,6 +111,11 @@ healHandler = () => {
 	console.log(currentPlayerHealth.toFixed(1));
 };
 
+logBattle = () => {
+	console.log(battleLog);
+};
+
 attackBtn.addEventListener("click", attackHandler);
 strongAttackBtn.addEventListener("click", strongAttackHandler);
 healBtn.addEventListener("click", healHandler);
+logBtn.addEventListener("click", logBattle);
