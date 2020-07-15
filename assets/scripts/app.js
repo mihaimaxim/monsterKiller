@@ -14,20 +14,21 @@ const logMonsterAttack = "MONSTER_ATTACK";
 const logHeal = "HEAL";
 const logGameOver = "GAME_OVER";
 
-writeToLog = (eventType) => {
+writeToLog = (eventType, attackType) => {
 	let logEntry = {
-		event: eventType,
+		outcome: eventType,
+		attackType: attackType,
 	};
 
-	if (eventType === logAttack) {
+	if (attackType === logAttack) {
 		logEntry;
-	} else if (eventType === logStrongAttack) {
+	} else if (attackType === logStrongAttack) {
 		logEntry;
-	} else if (eventType === logMonsterAttack) {
+	} else if (attackType === logMonsterAttack) {
 		logEntry;
-	} else if (eventType === logHeal) {
+	} else if (attackType === logHeal) {
 		logEntry;
-	} else if (eventType === logGameOver) {
+	} else if (attackType === logGameOver) {
 		logEntry;
 	}
 
@@ -52,47 +53,21 @@ reset = () => {
 	hasExtraLife = true;
 };
 
-endRound = () => {
-	const playerDamage = dealPlayerDamage(monsterAttackValue);
-	currentPlayerHealth -= playerDamage;
-
-	if (currentPlayerHealth <= 0 && hasExtraLife) {
-		currentPlayerHealth = maxLife;
-		removeBonusLife();
-		hasExtraLife = false;
-		setPlayerHealth(maxLife);
-		alert("no worries!");
-	}
-
-	if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
-		alert("you won!");
-		reset();
-		writeToLog('CHAMPION!');
-	} else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
-		alert("you lost!");
-		reset();
-		writeToLog('LOSER!');
-	} else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
-		alert("draw!");
-		reset();
-		writeToLog('DRAW!');
-	}
-};
-
 attackHandler = () => {
 	const damage = dealMonsterDamage(attackValue);
 	monsterAttack(damage);
-};
-
-monsterAttack = (damage) => {
-	currentMonsterHealth -= damage;
-	endRound();
+	writeToLog(null, logAttack);
 };
 
 strongAttackHandler = () => {
 	const strongDamage = dealMonsterDamage(strongAttackValue);
 	monsterAttack(strongDamage);
-	
+	writeToLog(null, logStrongAttack);
+};
+
+monsterAttack = (damage) => {
+	currentMonsterHealth -= damage;
+	endRound();
 };
 
 healHandler = () => {
@@ -109,6 +84,33 @@ healHandler = () => {
 	currentPlayerHealth += heal;
 	endRound();
 	console.log(currentPlayerHealth.toFixed(1));
+};
+
+endRound = () => {
+	const playerDamage = dealPlayerDamage(monsterAttackValue);
+	currentPlayerHealth -= playerDamage;
+
+	if (currentPlayerHealth <= 0 && hasExtraLife) {
+		currentPlayerHealth = maxLife;
+		removeBonusLife();
+		hasExtraLife = false;
+		setPlayerHealth(maxLife);
+		alert("no worries!");
+	}
+
+	if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
+		alert("you won!");
+		reset();
+		writeToLog("CHAMPION!");
+	} else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
+		alert("you lost!");
+		reset();
+		writeToLog("LOSER!");
+	} else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
+		alert("draw!");
+		reset();
+		writeToLog("DRAW!");
+	}
 };
 
 logBattle = () => {
