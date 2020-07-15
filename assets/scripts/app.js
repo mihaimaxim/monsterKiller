@@ -1,6 +1,6 @@
 const attackValue = 9;
 const strongAttackValue = 15;
-const monsterAttackValue = 12;
+const monsterAttackValue = 25;
 const healValue = 20;
 
 const userGivenLife = prompt("Give life!", "100");
@@ -20,16 +20,34 @@ writeToLog = (outcome, action) => {
 		action: action,
 	};
 
-	if (action === logAttack) {
-		logEntry;
-	} else if (action === logStrongAttack) {
-		logEntry;
-	} else if (action === logMonsterAttack) {
-		logEntry;
-	} else if (action === logHeal) {
-		logEntry;
-	} else if (action === logGameOver) {
-		logEntry;
+	// if (action === logAttack) {
+	// 	logEntry;
+	// } else if (action === logStrongAttack) {
+	// 	logEntry;
+	// } else if (action === logMonsterAttack) {
+	// 	logEntry;
+	// } else if (action === logHeal) {
+	// 	logEntry;
+	// } else if (action === logGameOver) {
+	// 	logEntry;
+	// }
+
+	switch (action) {
+		case logAttack:
+			logEntry;
+			break;
+		case logStrongAttack:
+			logEntry;
+			break;
+		case logMonsterAttack:
+			logEntry;
+			break;
+		case logHeal:
+			logEntry;
+			break;
+		case logGameOver:
+			logEntry;
+			break;
 	}
 
 	battleLog.push(logEntry);
@@ -83,7 +101,7 @@ healHandler = () => {
 	increasePlayerHealth(heal);
 	currentPlayerHealth += heal;
 	endRound();
-	writeToLog(null, logHeal)
+	writeToLog(null, logHeal);
 };
 
 endRound = () => {
