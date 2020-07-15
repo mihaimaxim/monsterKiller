@@ -133,8 +133,11 @@ endRound = () => {
 
 logBattle = () => {
 	// console.log(battleLog);
-	for (let i = 0; i < battleLog.length; i++) {
-		console.log(battleLog[i]);
+	// for (let i = 0; i < battleLog.length; i++) {
+	// 	console.log(battleLog[i]);
+	// }
+	for (const element of battleLog) {
+		console.log(element);
 	}
 };
 
