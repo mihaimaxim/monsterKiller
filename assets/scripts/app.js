@@ -14,21 +14,21 @@ const logMonsterAttack = "MONSTER_ATTACK";
 const logHeal = "HEAL";
 const logGameOver = "GAME_OVER";
 
-writeToLog = (eventType, attackType) => {
+writeToLog = (outcome, action) => {
 	let logEntry = {
-		outcome: eventType,
-		attackType: attackType,
+		outcome: outcome,
+		action: action,
 	};
 
-	if (attackType === logAttack) {
+	if (action === logAttack) {
 		logEntry;
-	} else if (attackType === logStrongAttack) {
+	} else if (action === logStrongAttack) {
 		logEntry;
-	} else if (attackType === logMonsterAttack) {
+	} else if (action === logMonsterAttack) {
 		logEntry;
-	} else if (attackType === logHeal) {
+	} else if (action === logHeal) {
 		logEntry;
-	} else if (attackType === logGameOver) {
+	} else if (action === logGameOver) {
 		logEntry;
 	}
 
@@ -83,7 +83,7 @@ healHandler = () => {
 	increasePlayerHealth(heal);
 	currentPlayerHealth += heal;
 	endRound();
-	console.log(currentPlayerHealth.toFixed(1));
+	writeToLog(null, logHeal)
 };
 
 endRound = () => {
