@@ -119,15 +119,15 @@ endRound = () => {
 	if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
 		alert("you won!");
 		reset();
-		writeToLog("CHAMPION!");
+		writeToLog("CHAMPION!", null);
 	} else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
 		alert("you lost!");
 		reset();
-		writeToLog("LOSER!");
+		writeToLog("LOSER!", null);
 	} else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
 		alert("draw!");
 		reset();
-		writeToLog("DRAW!");
+		writeToLog("DRAW!", null);
 	}
 };
 
