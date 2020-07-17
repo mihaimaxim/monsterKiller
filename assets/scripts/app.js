@@ -12,7 +12,14 @@ giveMaxLife = () => {
    return parsedLife;
 };
 
-let maxLife = giveMaxLife();
+let maxLife;
+
+try {
+   maxLife = giveMaxLife();
+} catch (error) {
+	console.log(error);
+	maxLife = 100;
+}
 
 let battleLog = [];
 
