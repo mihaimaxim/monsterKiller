@@ -17,8 +17,8 @@ let maxLife;
 try {
    maxLife = giveMaxLife();
 } catch (error) {
-	console.log(error);
-	maxLife = 100;
+   console.log(error);
+   maxLife = 100;
 }
 
 let battleLog = [];
@@ -150,6 +150,7 @@ logBattle = () => {
    for (const element of battleLog) {
       console.log(element);
    }
+   battleLog = [];
 };
 
 attackBtn.addEventListener("click", attackHandler);
